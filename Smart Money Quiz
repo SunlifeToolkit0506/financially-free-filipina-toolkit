@@ -1,0 +1,31 @@
+// script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  const questions = document.querySelectorAll(".question");
+  let current = 0;
+
+  function showQuestion(index) {
+    questions.forEach((q, i) => {
+      q.classList.remove("active");
+      if (i === index) q.classList.add("active");
+    });
+  }
+
+  showQuestion(current);
+
+  window.next = function(id) {
+    const nextIndex = Array.from(questions).findIndex(q => q.id === id);
+    if (nextIndex >= 0) {
+      showQuestion(nextIndex);
+    }
+  };
+
+  const form = document.getElementById("quiz-form");
+  const result = document.getElementById("result");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    form.style.display = "none";
+    result.style.display = "block";
+  });
+});
